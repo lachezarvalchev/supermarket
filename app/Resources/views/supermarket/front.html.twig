@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="text-center">
+        <a href="{{ path('list_products') }}" class="btn btn-primary center-block">View products<span class="fa"></span></a>
+        <a href="{{ path('list_promotions') }}" class="btn btn-primary center-block">View promotions<span class="fa"></span></a>
+        <a href="{{ path('view_shopping_cart') }}" class="btn btn-primary center-block">View shopping cart<span class="fa"></span></a>
+    </div>
+{% endblock %}

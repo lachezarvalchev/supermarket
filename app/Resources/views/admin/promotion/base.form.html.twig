@@ -1,0 +1,18 @@
+{#{{ form_start(promotionForm) }}#}
+    {#{{ form_widget(promotionForm) }}#}
+
+    {#<button type="submit" class="btn btn-primary" formnovalidate>Save</button>#}
+{#{{ form_end(promotionForm) }}#}
+
+
+{{ form_start(promotionForm) }}
+    {#{{ form_widget(promotionForm) }}#}
+<h3>Products</h3> <ul class="tags">
+    {# iterate over each existing tag and render its only field: name #}
+    {% for prod in promotionForm.product %}
+        <li>{{ form_row(prod.sku) }}</li>
+        <li>{{ form_row(prod.name) }}</li>
+        <li>{{ form_row(prod.price) }}</li>
+    {% endfor %} </ul>
+<button type="submit" class="btn btn-primary" formnovalidate>Save</button>
+{{ form_end(promotionForm) }}

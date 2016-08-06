@@ -1,0 +1,5 @@
+AppBundle\Entity\Product:
+  product_{1..25}:
+    name: <products()>
+    price: <numberBetween(10, 100)>
+    sku: <skus()>

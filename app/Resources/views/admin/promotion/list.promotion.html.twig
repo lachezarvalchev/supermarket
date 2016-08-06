@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="pull-right" style="margin-bottom: 10px; margin-top: 10px;">
+        <a href="{{ path('add_promotion') }}" class="btn btn-primary pull-right">Add new promotion<span class="fa"></span></a>
+    </div>
+
+    <div>
+        <table xmlns="http://www.w3.org/1999/html" class="table table-bordered">
+            <thead>
+            <tr>
+                <th>NAME</th>
+                <th>PROMOTION CODE</th>
+                <th>PRICE</th>
+                <th>Operations</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for promotion in promotions %}
+                <tr>
+                    <td>{{ promotion.name }}</td>
+                    <td>{{ promotion.code }}</td>
+                    <td>{{ promotion.price }}</td>
+                    <td>
+                        <a href="{{ path('edit_promotion', {'id': product.id}) }}">Edit</a>
+                        <a href="{{ path('remove_promotion', {'id': product.id}) }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </div>
+{% endblock %}
