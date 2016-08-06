@@ -22,8 +22,8 @@
                     <td>{{ promotion.code }}</td>
                     <td>{{ promotion.price }}</td>
                     <td>
-                        <a href="{{ path('edit_promotion', {'id': product.id}) }}">Edit</a>
-                        <a href="{{ path('remove_promotion', {'id': product.id}) }}">Delete</a>
+                        <a href="{{ path('edit_promotion', {'id': promotion.id}) }}">Edit</a>
+                        <a href="{{ path('remove_promotion', {'id': promotion.id}) }}">Delete</a>
                     </td>
                 </tr>
             {% endfor %}

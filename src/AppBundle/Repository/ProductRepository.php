@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 
 class ProductRepository extends EntityRepository {
 
-    /**
+     /**
      * @return Product[]
      */
      public function findOrderBySKU() {
@@ -17,4 +17,5 @@ class ProductRepository extends EntityRepository {
          ->getQuery()
          ->execute();
      }
+
 }

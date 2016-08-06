@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,10 +13,7 @@ class PromotionFormType extends AbstractType
       $builder
         ->add('name')
         ->add('price')
-        ->add('product', CollectionType::class, array(
-          'entry_type' => ProductFormType::class,
-          'allow_add' => true,
-        ));
+        ->add('code');
     }
 
     public function configureOptions(OptionsResolver $resolver)

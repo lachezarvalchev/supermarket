@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Product;
 use AppBundle\Entity\Promotion;
 use AppBundle\Form\PromotionFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -17,7 +16,7 @@ class PromotionController extends Controller
    */
   public function showPromotions() {
     $em = $this->getDoctrine()->getManager();
-    $promotions = $em->getRepository('AppBundle:Promotion')->findAll();
+    $promotions = $em->getRepository('AppBundle:Promotion')->findOrderByCode();
 
     if (!isset($promotions)) {
       throw $this->createNotFoundException('No promotions at the moment.');
@@ -42,7 +41,7 @@ class PromotionController extends Controller
       $em->flush();
 
       $this->addFlash('success', 'Successfully added new promotion.');
-      return $this->redirectToRoute('homepage');
+      return $this->redirectToRoute('list_promotions');
     }
 
     return $this->render('admin/promotion/new.html.twig', [
@@ -64,7 +63,7 @@ class PromotionController extends Controller
       $em->flush();
 
       $this->addFlash('success', 'Successfully edited the promotion.');
-      return $this->redirectToRoute('homepage');
+      return $this->redirectToRoute('list_promotions');
     }
 
     return $this->render('admin/promotion/edit.html.twig', [
@@ -87,7 +86,7 @@ class PromotionController extends Controller
       $em->flush();
     }
 
-    return $this->redirectToRoute('homepage');
+    return $this->redirectToRoute('list_promotions');
   }
 
 }
