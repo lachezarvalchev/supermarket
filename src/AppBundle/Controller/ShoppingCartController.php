@@ -2,34 +2,33 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Product;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use AppBundle\Entity\CartItem;
+use AppBundle\Service\ShoppingCart;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ShoppingCartController extends Controller
 {
-    public function indexAction($name)
-    {
-        return $this->render('', array('name' => $name));
-    }
-
   /**
-   * @Route("/cart", name="view_shopping_cart")
+   * @Route("/cart/view", name="view_shopping_cart")
    */
   public function showShoppingCart() {
-    $em = $this->getDoctrine()->getManager();
-    $items = $em->getRepository('AppBundle:Promotion:ShoppingCart')->find(1)->getContainProducts();
-    return ['items' => $items];
+    $entity_manager = $this->getDoctrine()->getManager();
+    $shopping_cart = new ShoppingCart($entity_manager);
+    $items = $shopping_cart->getItems();
 
-    return $this->render('supermarket/front.html.twig');
-  }
+    // TODO: Check if shopping cart exists
+    // If yes - load it
+    // If no - create it
+    // Add product
+    // Validate against price rules
+    // Do necessary changes on prices
+    // Redirect to shopping cart view
 
-  /**
-   * @Route("/add/{id}", name="add_product_cart")
-   */
-  public function addProductCart(Product $product) {
-
+    return $this->render(
+      'supermarket/shoppingcart.html.twig', [
+      'items' => $items,
+    ]);
   }
 
   /**
@@ -37,6 +36,24 @@ class ShoppingCartController extends Controller
    */
   public function checkoutCart() {
 
+  }
+
+  /**
+   * @Route("/cart/{id}/delete", name="remove_item")
+   */
+  public function removeProduct(CartItem $item) {
+    $em = $this->getDoctrine()->getManager();
+
+    if (!isset($item)) {
+      throw $this->createNotFoundException('There is no such product');
+    }
+    else {
+      $this->addFlash('success', 'Successfully removed product.');
+      $em->remove($item);
+      $em->flush();
+    }
+
+    return $this->redirectToRoute('view_shopping_cart');
   }
 
 }

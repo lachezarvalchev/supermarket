@@ -95,7 +95,9 @@ class Promotion {
    * @param mixed $code
    */
   public function setCode($code) {
-    $this->code = $code;
+    $reorder = str_split($code);
+    asort($reorder);
+    $this->code = implode("", $reorder);
   }
 
   /**

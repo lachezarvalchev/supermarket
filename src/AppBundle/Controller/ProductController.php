@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\CartItem;
 use AppBundle\Entity\Product;
+use AppBundle\Service\ShoppingCart;
 use AppBundle\Form\ProductFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -86,6 +88,19 @@ class ProductController extends Controller {
     }
 
     return $this->redirectToRoute('list_products');
+  }
+
+  /**
+   * @Route("/product/{id}/buy", name="add_product_cart")
+   */
+  public function addProductCart(Product $product) {
+    $entity_manager = $this->getDoctrine()->getManager();
+    $shopping_cart = new ShoppingCart($entity_manager);
+
+    $item = new CartItem();
+    $shopping_cart->addItem($item, $product);
+
+    return $this->redirectToRoute('view_shopping_cart');
   }
 
 }

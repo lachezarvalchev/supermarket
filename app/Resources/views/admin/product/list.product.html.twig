@@ -22,7 +22,7 @@
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
                     <td>
-                        <a href="{{ path('add_product_cart', {'productId': product.id}) }}">Buy</a>
+                        <a href="{{ path('add_product_cart', {'id': product.id}) }}">Buy</a>
                         <a href="{{ path('edit_product', {'id': product.id}) }}">Edit</a>
                         <a href="{{ path('remove_product', {'id': product.id}) }}">Delete</a>
                     </td>
